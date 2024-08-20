@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  CI/CD:
+  build:
     runs-on: ubuntu-latest
     strategy:
      matrix: 
