@@ -36,4 +36,4 @@ jobs:
         run: npm run test:unit
 
       - name: Testing loki screenshots
-        run: npm runtest:ui:ci # Необходимо указать команду для этого шага
+        run: npm run test:ui:ci # Необходимо указать команду для этого шага
