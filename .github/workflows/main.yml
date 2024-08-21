@@ -36,4 +36,4 @@ jobs:
         run: npm run test:unit
 
       - name: Testing loki 
-        run: npm build-storybook && npm test:ui --requireReference --reactUri file:./storybook-static # Необходимо указать команду для этого шага
+        run: npm storybook && npm test:ui --requireReference --reactUri file:./storybook-static # Необходимо указать команду для этого шага
