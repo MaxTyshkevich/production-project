@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  CI:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -28,6 +28,9 @@ jobs:
 
       - name: Testing TypeScript
         run: npm run lint:ts
+        
+      - name: build project
+        run: npm run build:prod
 
       - name: Testing style lint 
         run: npm run lint:scss
@@ -36,4 +39,4 @@ jobs:
         run: npm run test:unit
 
       - name: Testing loki screenshots
-        run: npm run test:ui:ci # Необходимо указать команду для этого шага
+        run: npm run test:ui:ci
