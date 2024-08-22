@@ -40,7 +40,7 @@ jobs:
 
       - name: Testing loki screenshots
         run: npm run test:ui:ci
-    deploy:
+  deploy:
       needs: CI
     # Specify runner + deployment step
       runs-on: ubuntu-latest
