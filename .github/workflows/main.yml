@@ -40,11 +40,11 @@ jobs:
 
       - name: Testing loki screenshots
         run: npm run test:ui:ci
-        
-      - name: Deploy to GitHub Pages
+
+      - name: Deploy to GitHub Pages https://maxtyshkevich.github.io/production-project
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.PROJECT_SECRET }}
-          publish_dir: ./build
+          publish_dir: build
           publish_branch: gh-pages
 
