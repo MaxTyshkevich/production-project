@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  CI:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -16,10 +16,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
         
@@ -28,6 +28,9 @@ jobs:
 
       - name: Testing TypeScript
         run: npm run lint:ts
+        
+      - name: build project
+        run: npm run build:prod
 
       - name: Testing style lint 
         run: npm run lint:scss
@@ -35,5 +38,13 @@ jobs:
       - name: Testing unit 
         run: npm run test:unit
 
-      - name: Testing loki 
-        run: echo "Loki testing step" # Необходимо указать команду для этого шага
+      - name: Testing loki screenshots
+        run: npm run test:ui:ci
+        
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          publish_branch: gh-pages
+
