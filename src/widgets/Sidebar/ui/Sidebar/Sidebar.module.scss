@@ -4,10 +4,13 @@
     background: var(--inverted-bg-color);
     position: relative;
     transition: width 0.3s;
-}
 
-.collapsed {
-    width: var(--sidebar-width-collapsed);
+    .collapsedBtn {
+        position: absolute;
+        right: 0;
+        bottom: 8%;
+        transform: translateX(100%);
+    }
 }
 
 .switchers {
@@ -20,4 +23,29 @@
 
 .lang {
     margin-left: 20px;
+}
+
+.collapsed {
+    width: var(--sidebar-width-collapsed);
+
+    .switchers {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .lang {
+        margin-left: initial;
+    }
+}
+
+.items {
+    margin: top;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.linkIcon {
+    fill: var(--inverted-primary-color);
 }
