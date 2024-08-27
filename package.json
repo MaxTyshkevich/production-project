@@ -21,7 +21,7 @@
     "visual:report": "npm-run-all visual:report:*",
     "visual:report:json": "node scripts/generate-visual-json-report.js",
     "visual:report:html": "reg-cli --from .loki/report.json --report .loki/report.html",
-    "test:ui:report": "visual:report:json && visual:report:html"
+    "test:ui:report": "npm run visual:report:json && npm run visual:report:html"
   },
   "keywords": [],
   "author": "",
