@@ -8,6 +8,10 @@
     opacity: 0;
     pointer-events: none;
     transition: all 300ms;
+
+    font: var(--font-m);
+    color: var(--primary-color);
+    
 }
 
 .content {
