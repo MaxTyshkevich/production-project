@@ -21,8 +21,7 @@
     "visual:report:json": "node scripts/generate-visual-json-report.js",
     "visual:report:html": "reg-cli --from .loki/report.json --report .loki/report.html",
     "test:ui:report": "npm run visual:report:json && npm run visual:report:html",
-    "server": "npx json-server ./jsonServer/db.json",
-    "server:dev": "node ./jsonServer/index.js"
+    "server:start": "node jsonServer/index.js"
   },
   "keywords": [],
   "author": "",
