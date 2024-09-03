@@ -3,11 +3,16 @@
     color: var(--primary-color);
 }
 
-.clear {
+.clear,
+.clearInverted {
     padding: 0;
     border: none;
     background: none;
     outline: none;
+}
+
+.clearInverted {
+    color: var(--inverted-primary-color);
 }
 
 .outline {
@@ -22,10 +27,6 @@
     color: var(--primary-color);
     border: none;
 }
-
-/* .square {
-    font-size: 20px;
-} */
 
 .backgroundInverted {
     background: var(--inverted-bg-color);
