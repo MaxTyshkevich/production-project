@@ -14,14 +14,22 @@
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
     "test:unit": "jest --config ./config/jest/jest.config.ts",
     "test:ui": "loki test",
-    "test:ui:ci": "build-storybook -c ./config/storybook && loki --requireReference --reactUri file:./storybook-static",
+    "test:ui:ci": "build-storybook -c ./config/storybook && loki --requireReference --reactUri file:./storybook-static ",
     "test:ui:ok": "loki approve",
     "storybook": "start-storybook -p 6006 -c ./config/storybook",
     "build-storybook": "build-storybook -c ./config/storybook",
 
+
     "predeploy": "npm run build:prod",
     "deploy": "gh-pages -d build",
     "postdeploy": "echo 'Deployment complete!' "
+
+    "visual:report": "npm-run-all visual:report:*",
+    "visual:report:json": "node scripts/generate-visual-json-report.js",
+    "visual:report:html": "reg-cli --from .loki/report.json --report .loki/report.html",
+    "test:ui:report": "npm run visual:report:json && npm run visual:report:html",
+    "server:start": "node jsonServer/index.js"
+
   },
   "keywords": [],
   "author": "",
@@ -61,13 +69,15 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.2",
-    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
+    "json-server": "^0.17.4",
     "loki": "^0.28.1",
     "mini-css-extract-plugin": "^2.5.3",
+    "reg-cli": "^0.18.7",
     "regenerator-runtime": "^0.13.9",
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
