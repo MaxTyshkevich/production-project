@@ -7,7 +7,7 @@ import { StateSchema } from '../config/StateSchema';
 
 interface StoreProviderProps {
 
-    initialState?:  DeepPartial<StateSchema>;
+    initialState?: DeepPartial<StateSchema>;
 }
 
 export const StoreProvider: FC<StoreProviderProps> = ({ children, initialState }) => {

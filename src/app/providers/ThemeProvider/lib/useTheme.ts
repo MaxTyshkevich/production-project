@@ -15,10 +15,6 @@ export function useTheme(): UseThemeResult {
         localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme);
     };
 
-    useEffect(() => {
-        document.documentElement.className = theme;
-    }, [theme]);
-
     return {
         theme,
         toggleTheme,
