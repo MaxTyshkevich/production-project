@@ -49,13 +49,9 @@ jobs:
         with:
           enablement: true
 
-          
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: "./storybook-static"
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
-
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: "./storybook-static"
