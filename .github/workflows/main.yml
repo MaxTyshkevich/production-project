@@ -42,10 +42,7 @@ jobs:
 
       - name: Testing loki screenshots
         run: npm run test:ui:ci
-        
-      - name: build storybook
-        run: npm run build-storybook
-        
+               
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
