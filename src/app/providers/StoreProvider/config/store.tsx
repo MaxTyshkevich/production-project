@@ -1,11 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { counterReducer } from 'entities/Counter/modal/slice/counterSlice';
+import { userReducer } from 'entities/User';
 import { StateSchema } from './StateSchema';
 
-export const createReduxStore = (initialState?: StateSchema) => configureStore({
-    reducer: {
+export const createReduxStore = (initialState?: StateSchema) => {
+    const rootReducers = combineReducers({
         counter: counterReducer,
-    },
-    devTools: __IS_DEV__,
-    preloadedState: initialState,
-});
+        user: userReducer,
+    });
+
+    return configureStore({
+        reducer: rootReducers,
+        devTools: __IS_DEV__,
+        preloadedState: initialState,
+
+    });
+};
