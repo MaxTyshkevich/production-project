@@ -1,3 +1,14 @@
-.loginform {
-    padding: 5;
+.LoginForm {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.input {
+    margin-top: 10px;
+}
+
+.loginBtn {
+    margin-top: 15px;
+    margin-left: auto;
 }

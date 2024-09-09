@@ -1,3 +1,2 @@
-export type { UserSchema } from './modal/types/userSchema';
-export { User } from './ui/User';
-export { userReducer, userAction } from './modal/slice/userSlice';
+export type { UserSchema, User } from './modal/types/userSchema';
+export { userReducer, userActions } from './modal/slice/userSlice';
