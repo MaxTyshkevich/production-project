@@ -1,27 +1,49 @@
-import { FC, useCallback } from 'react';
+import {
+    FC, useCallback, useEffect,
+} from 'react';
 // eslint-disable-next-line max-len
 import { loginByUsername } from 'features/AuthByUserName/model/services/loginByUsername/LoginByUsername';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Input } from 'shared/ui/Input/Input';
 import { Button } from 'shared/ui/Button/Button';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, useStore } from 'react-redux';
 import { getLoginState } from 'features/AuthByUserName/model/selectors/getLoginState/getLoginState';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
-import { loginActions } from 'features/AuthByUserName';
+import { loginActions, loginReducer } from 'features/AuthByUserName';
 
+import {
+    ReduxStoreWithManager,
+    StateSchemaKey,
+} from 'app/providers/StoreProvider/config/StateSchema';
+
+import { Reducer } from '@reduxjs/toolkit';
 import cls from './LoginForm.module.scss';
+import { useAsyncStore } from './useAsyncStore';
+import { Wrap } from './Wrap';
 
-interface LoginFormProps {
+export type ReducersList = {
+    [name in StateSchemaKey]?: Reducer;
+}
+
+type ReducersListEntry = [StateSchemaKey, Reducer]
+
+const initialReducers: ReducersList = {
+    loginForm: loginReducer,
+};
+
+export interface LoginFormProps {
   className?: string;
 }
 
-export const LoginForm: FC<LoginFormProps> = ({ className }) => {
+const LoginForm: FC<LoginFormProps> = ({ className }) => {
+    useAsyncStore({ initialReducers });
+
     const { t } = useTranslation();
     const dispatch = useDispatch();
 
     const {
-        username, password, error, isLoading,
+        isLoading, password, username, error,
     } = useSelector(getLoginState);
 
     const onChangeUsername = useCallback((value: string) => {
@@ -37,6 +59,7 @@ export const LoginForm: FC<LoginFormProps> = ({ className }) => {
     }, [dispatch, password, username]);
 
     return (
+
         <div className={classNames(cls.loginform, {}, [className])}>
             <Text title={t('Форма авторизации')} />
             {error
@@ -64,5 +87,8 @@ export const LoginForm: FC<LoginFormProps> = ({ className }) => {
                 {t('Войти')}
             </Button>
         </div>
+
     );
 };
+
+export default LoginForm;

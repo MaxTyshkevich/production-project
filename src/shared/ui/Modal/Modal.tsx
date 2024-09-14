@@ -1,5 +1,7 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import React, { FC, useCallback, useEffect } from 'react';
+import React, {
+    FC, useCallback, useEffect, useState,
+} from 'react';
 
 import { useTheme } from 'app/providers/ThemeProvider';
 import cls from './Modal.module.scss';
@@ -9,11 +11,13 @@ interface ModalProps {
   className?: string;
   isOpen: boolean;
   onClose: () => void
+  lazy?: boolean;
 }
 
 export const Modal:FC<ModalProps> = ({
-    className, children, isOpen, onClose,
+    className, children, isOpen, onClose, lazy,
 }) => {
+    const [isMounted, setIsMounted] = useState(false);
     const { theme } = useTheme();
     const closeHandler = useCallback(() => {
         if (onClose) {
@@ -40,6 +44,16 @@ export const Modal:FC<ModalProps> = ({
             window.removeEventListener('keydown', onkeydown);
         };
     }, [onkeydown]);
+
+    useEffect(() => {
+        if (isOpen) {
+            setIsMounted(true);
+        }
+    }, [isOpen]);
+
+    if (lazy && !isMounted) {
+        return null;
+    }
     return (
         <Portal>
             <div

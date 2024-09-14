@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
-import { LoginForm } from './LoginForm';
+import LoginForm from './LoginForm';
 
 export default {
     title: 'features/LoginForm',
@@ -8,6 +8,8 @@ export default {
     argTypes: {
         backgroundColor: { control: 'color' },
     },
+
+    decorators: [StoreDecorator({ loginForm: { username: '123', password: 'asd' } })],
 } as ComponentMeta<typeof LoginForm>;
 
 const Template: ComponentStory<typeof LoginForm> = (args) => <LoginForm {...args} />;
