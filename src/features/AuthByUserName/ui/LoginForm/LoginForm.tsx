@@ -1,5 +1,5 @@
 import {
-    FC, useCallback, useEffect,
+    FC, memo, useCallback,
 } from 'react';
 // eslint-disable-next-line max-len
 import { loginByUsername } from 'features/AuthByUserName/model/services/loginByUsername/LoginByUsername';
@@ -7,26 +7,13 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { Input } from 'shared/ui/Input/Input';
 import { Button } from 'shared/ui/Button/Button';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getLoginState } from 'features/AuthByUserName/model/selectors/getLoginState/getLoginState';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
-import { loginActions, loginReducer } from 'features/AuthByUserName';
-
-import {
-    ReduxStoreWithManager,
-    StateSchemaKey,
-} from 'app/providers/StoreProvider/config/StateSchema';
-
-import { Reducer } from '@reduxjs/toolkit';
+import { loginActions, loginReducer } from 'features/AuthByUserName/model/slice/loginSlice';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { ReducersList, useAsyncStore } from 'shared/hooks/useAsyncStore';
 import cls from './LoginForm.module.scss';
-import { useAsyncStore } from './useAsyncStore';
-import { Wrap } from './Wrap';
-
-export type ReducersList = {
-    [name in StateSchemaKey]?: Reducer;
-}
-
-type ReducersListEntry = [StateSchemaKey, Reducer]
 
 const initialReducers: ReducersList = {
     loginForm: loginReducer,
@@ -34,13 +21,14 @@ const initialReducers: ReducersList = {
 
 export interface LoginFormProps {
   className?: string;
+  onSuccess: ()=> void;
 }
 
-const LoginForm: FC<LoginFormProps> = ({ className }) => {
+const LoginForm = memo(({ className, onSuccess }:LoginFormProps) => {
     useAsyncStore({ initialReducers });
 
     const { t } = useTranslation();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const {
         isLoading, password, username, error,
@@ -54,9 +42,14 @@ const LoginForm: FC<LoginFormProps> = ({ className }) => {
         dispatch(loginActions.setPassword(value));
     }, [dispatch]);
 
-    const onLoginClick = useCallback(() => {
-        dispatch(loginByUsername({ username, password }));
-    }, [dispatch, password, username]);
+    const onLoginClick = useCallback(async () => {
+        const result = await dispatch(loginByUsername({ username, password }));
+        /* result.meta.requestStatus */
+
+        if (result.meta.requestStatus === 'fulfilled') {
+            onSuccess();
+        }
+    }, [dispatch, onSuccess, password, username]);
 
     return (
 
@@ -89,6 +82,6 @@ const LoginForm: FC<LoginFormProps> = ({ className }) => {
         </div>
 
     );
-};
+});
 
 export default LoginForm;

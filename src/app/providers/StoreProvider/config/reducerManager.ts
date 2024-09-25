@@ -1,5 +1,6 @@
 import {
     AnyAction,
+    CombinedState,
     combineReducers, Reducer, ReducersMapObject,
 } from '@reduxjs/toolkit';
 import {
@@ -16,12 +17,12 @@ export function createReducerManager(initialReducers: ReducersMapObject<StateSch
 
     return {
         getReducerMap: () => reducers,
-        reduce: (state: StateSchema, action: AnyAction) => {
+        reduce: (state: StateSchema, action: AnyAction):CombinedState<StateSchema> => {
             if (keysToRemove.length > 0) {
                 // eslint-disable-next-line no-param-reassign
                 state = { ...state };
                 keysToRemove.forEach((key) => {
-                    delete state[key];
+                    delete state![key];
                 });
                 keysToRemove = [];
             }
@@ -30,12 +31,12 @@ export function createReducerManager(initialReducers: ReducersMapObject<StateSch
 
         // Adds a new reducer with the specified key
         add: (key: StateSchemaKey, reducer: Reducer) => {
-            if (!key || reducers[key]) {
+            if (!key || reducers![key]) {
                 return;
             }
-            console.log({ combinedReducer });
+
             // Add the reducer to the reduce    r mapping
-            reducers[key] = reducer;
+            reducers![key] = reducer;
 
             // Generate a new combined reducer
             combinedReducer = combineReducers(reducers);
@@ -43,7 +44,7 @@ export function createReducerManager(initialReducers: ReducersMapObject<StateSch
 
         // Removes a reducer with the specified key
         remove: (key: StateSchemaKey) => {
-            if (!key || !reducers[key]) {
+            if (!key || !reducers![key]) {
                 return;
             }
 
