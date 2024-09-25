@@ -12,7 +12,7 @@ export default {
     argTypes: {
         backgroundColor: { control: 'color' },
     },
-    decorators: [StoreDecorator({ user: { authData: 'fake auth' } })],
+    decorators: [StoreDecorator({ user: { authData: { id: 1, username: 'test user', password: '123' } } })],
 } as ComponentMeta<typeof Sidebar>;
 
 const Template: ComponentStory<typeof Sidebar> = (args) => <Sidebar {...args} />;
