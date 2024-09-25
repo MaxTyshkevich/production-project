@@ -2,33 +2,64 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { Modal } from 'shared/ui/Modal/Modal';
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { Theme } from 'app/providers/ThemeProvider';
+import { LoginModal } from 'features/AuthByUserName/';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserAuthData } from 'entities/User/modal/selector/getUserAuthData/getUserAuthData';
+import { userActions } from 'entities/User';
 import cls from './Navbar.module.scss';
 
 interface NavbarProps {
     className?: string;
 }
 
-export const Navbar = ({ className }: NavbarProps) => {
+export const Navbar = memo(({ className }: NavbarProps) => {
     const { t } = useTranslation();
-    const [isOpen, setIsOpen] = useState(false);
+    const [isAuthModal, setIsAuthModal] = useState(false);
+    const authData = useSelector(getUserAuthData);
+    const dispatch = useDispatch();
 
-    const onClose = useCallback(() => setIsOpen(false), []);
-    const onOpen = () => setIsOpen(true);
+    const onCloseModal = useCallback(() => {
+        setIsAuthModal(false);
+    }, []);
+
+    const onShowModal = useCallback(() => {
+        setIsAuthModal(true);
+    }, []);
+
+    const onLogout = useCallback(() => {
+        dispatch(userActions.logout());
+    }, [dispatch]);
+
+    if (authData) {
+        return (
+            <div className={classNames(cls.Navbar, {}, [className])}>
+                <Button
+                    theme={ButtonTheme.CLEAR_INVERTED}
+                    className={cls.links}
+                    onClick={onLogout}
+                >
+                    {t('Выйти')}
+                </Button>
+            </div>
+        );
+    }
     return (
         <div className={classNames(cls.Navbar, {}, [className])}>
             <div className={cls.links}>
-                <Button theme={ButtonTheme.CLEAR_INVERTED} onClick={onOpen}>{t('Войти')}</Button>
-                <Modal isOpen={isOpen} onClose={onClose}>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    In debitis nulla reiciendis suscipit, ratione labore perspiciatis?
-                    Quis pariatur ipsa excepturi eveniet cum veniam soluta dolores, sequi
-                    quam rem, blanditiis quos eligendi tenetur possimus nesciunt reprehenderit
-                    deleniti harum modi iste minima eum nisi in quibusdam.
-                </Modal>
+                <Button
+                    theme={ButtonTheme.CLEAR_INVERTED}
+                    onClick={onShowModal}
+                >
+                    {t('Войти')}
+                </Button>
+                <LoginModal
+                    isOpen={isAuthModal}
+                    onClose={onCloseModal}
+                />
             </div>
         </div>
     );
-};
+});

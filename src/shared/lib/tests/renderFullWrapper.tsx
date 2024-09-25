@@ -18,13 +18,13 @@ export function componentRender(component: ReactNode, config: ConfigWrapper = {}
         initialState,
     } = config;
     return render(
-        <StoreProvider initialState={initialState}>
-            <MemoryRouter initialEntries={routes}>
+        <MemoryRouter initialEntries={routes}>
+            <StoreProvider initialState={initialState}>
                 <AppRouter />
                 <I18nextProvider i18n={i18nForTests}>
                     {component}
                 </I18nextProvider>
-            </MemoryRouter>
-        </StoreProvider>,
+            </StoreProvider>
+        </MemoryRouter>,
     );
 }
