@@ -5,4 +5,5 @@ export const getProfile = (state: StateSchema) => state.profile || {
     isLoading: false,
     error: undefined,
     data: undefined,
+    form: undefined,
 };
