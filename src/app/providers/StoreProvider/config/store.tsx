@@ -4,8 +4,6 @@ import {
 } from '@reduxjs/toolkit';
 import { counterReducer } from 'entities/Counter/modal/slice/counterSlice';
 import { userReducer } from 'entities/User';
-
-import { useDispatch } from 'react-redux';
 import { $api } from 'shared/api/api';
 import { NavigateOptions, To } from 'react-router-dom';
 import { ReduxStoreWithManager, StateSchema, ThunkExtraArg } from './StateSchema';
