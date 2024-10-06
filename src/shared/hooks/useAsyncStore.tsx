@@ -5,6 +5,7 @@ import {
 import { useEffect } from 'react';
 import { useStore } from 'react-redux';
 import { Reducer } from '@reduxjs/toolkit';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 
 export type ReducersList = {
     [name in StateSchemaKey]?: Reducer;
@@ -16,10 +17,11 @@ type useAsyncStoreProps ={
 
 export function useAsyncStore({ initialReducers, removeAfterUnmount = false }: useAsyncStoreProps) {
     const store = useStore() as ReduxStoreWithManager;
-
+    const dispatch = useAppDispatch();
     useEffect(() => {
         Object.entries(initialReducers).forEach(([name, reducer]) => {
             store.reducerManager.add(name as keyof ReducersList, reducer);
+            dispatch({ type: `@INIT ${name} reducer` });
         });
 
         return () => {
