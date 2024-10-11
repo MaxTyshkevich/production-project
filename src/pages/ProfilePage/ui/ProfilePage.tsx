@@ -6,6 +6,8 @@ import { fetchProfileData, ProfileCard } from 'entities/Profile';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { getProfile } from 'entities/Profile/model/selectors/getProfile';
+import { useParams } from 'react-router-dom';
+import { getUserAuthData, User } from 'entities/User';
 import cls from './ProfilePage.module.scss';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
@@ -19,17 +21,21 @@ const reducers: ReducersList = {
 
 const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
     useAsyncStore({ initialReducers: reducers, removeAfterUnmount: true });
-    const dispath = useAppDispatch();
+    const { id } = useParams();
+    const dispatch = useAppDispatch();
     const {
         form,
         error,
         isLoading,
         readonly,
     } = useSelector(getProfile);
+    const user: User | undefined = useSelector(getUserAuthData);
 
     useEffect(() => {
-        dispath(fetchProfileData());
-    }, [dispath]);
+        if (id) {
+            dispatch(fetchProfileData(id));
+        }
+    }, [dispatch, id]);
 
     return (
         <div className={classNames(cls.profile, {}, [className])}>
