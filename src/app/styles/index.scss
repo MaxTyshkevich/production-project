@@ -2,6 +2,7 @@
 @import "variables/global";
 @import "themes/normal";
 @import "themes/dark";
+@import "themes/orange.scss";
 
 .app {
     background: var(--bg-color);
@@ -17,4 +18,6 @@
 .page-wrapper {
     flex-grow: 1;
     padding: 20px;
+    height: calc(100vh - var(--navbar-height));
+    overflow-y: auto;
 }
