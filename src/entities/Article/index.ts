@@ -1,3 +1,7 @@
+export { ArticleView } from './ui/ArticleListItem/ArticleListItem';
+
+export { ArticleList } from './ui/ArticleList/ArticleList';
+
 export type { Article } from './modal/types/article';
 export type { ArticleDetailsSchema } from './modal/types/articleDetailsSchema';
 export { fetchArticleById } from './modal/services/fetchArticleById/fetchArticleById';

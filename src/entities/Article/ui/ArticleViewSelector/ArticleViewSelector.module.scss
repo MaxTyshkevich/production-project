@@ -1,0 +1,13 @@
+
+.ArticleViewSelector{
+
+    display: flex;
+    align-items: center;
+    justify-content: right;   
+   
+
+}
+.selected {
+    fill: var(--secondary-color);
+    transform: scale(1.15);
+}
