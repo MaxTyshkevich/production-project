@@ -10,6 +10,9 @@ import { ProfileSchema } from 'entities/Profile';
 import { UserSchema } from 'entities/User';
 import { AddCommentFormSchema } from 'features/AddCommentForm/modal/types/addCommentForm';
 import { LoginSchema } from 'features/AuthByUserName';
+import { ScrollPageSchema } from 'features/ScrollPage';
+import { ArticleDetailsPageSchema } from 'pages/ArticleDetailsPage/modal/types';
+
 import { ArticleDetailsCommentsSchema } from 'pages/ArticleDetailsPage/modal/types/ArticleDetailsCommentsSchema';
 import { ArticlesPageSchema } from 'pages/ArticlesPage/modal/types/ArticlePageSchema';
 import { NavigateOptions, To } from 'react-router-dom';
@@ -17,12 +20,17 @@ import { NavigateOptions, To } from 'react-router-dom';
 export interface StateSchema {
   counter: CounterSchema,
   user: UserSchema,
-
+  scrollPages: ScrollPageSchema,
   // async reducer
   loginForm?: LoginSchema,
   profile?: ProfileSchema,
+
+
   articleDetails?: ArticleDetailsSchema,
-  articleDetailsComments?: ArticleDetailsCommentsSchema;
+
+  /* 2 slices */
+  articleDetailsPage?: ArticleDetailsPageSchema;
+
   addCommentForm?: AddCommentFormSchema;
   articlesPage?: ArticlesPageSchema;
 }

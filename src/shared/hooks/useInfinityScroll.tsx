@@ -22,7 +22,6 @@ export const useInfinityScroll = ({ wrapperRef, triggerRef, callback }: UseInfin
 
             observer.current = new IntersectionObserver(([entry]) => {
                 if (entry.isIntersecting) {
-                    console.log({ entry });
                     callback();
                 }
             }, options);

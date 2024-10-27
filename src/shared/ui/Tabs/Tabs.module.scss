@@ -1,0 +1,15 @@
+.tabs{
+  display: flex;
+  gap: 8px;
+ 
+}
+
+
+.tab{
+  cursor: pointer;
+  transition: all 500;
+
+  &:hover{
+    transform: scale(1.1);
+  }
+}

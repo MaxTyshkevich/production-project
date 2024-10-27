@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { HTMLAttributeAnchorTarget, memo, useCallback } from 'react';
 import type{ Article } from 'entities/Article';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Text } from 'shared/ui/Text/Text';
@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { useHover } from 'shared/hooks/useHover';
+import { AppLink } from 'shared/ui/AppLink/AppLink';
 import cls from './ArticleListItem.module.scss';
 import { ArticleText } from '../ArticleText/ArticleText';
 
@@ -24,16 +25,20 @@ interface ArticleListItemProps {
   className?: string;
   view: ArticleView;
   article: Article
+  target?: HTMLAttributeAnchorTarget;
 }
 
 export const ArticleListItem = memo(({
     className,
     article,
     view,
+    target = '_self',
 }:ArticleListItemProps) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
+
     const [isHover, hoverEvents] = useHover();
+
     const onOpenArticle = useCallback(() => {
         navigate(RoutePath.article_details + article.id);
     }, [article.id, navigate]);
@@ -65,24 +70,31 @@ export const ArticleListItem = memo(({
                     <ArticleText block={textBlock} className={cls.textBlock} />
                 )}
                 <div className={cls.footer}>
-                    <Button onClick={onOpenArticle} theme={ButtonTheme.OUTLINE}>
-                        {t('Читать далее...')}
-                    </Button>
+                    <AppLink to={RoutePath.article_details + article.id} target={target}>
+                        <Button theme={ButtonTheme.OUTLINE}>
+                            {t('Читать далее...')}
+                        </Button>
+                    </AppLink>
                     {views}
                 </div>
             </Card>
         );
     }
     return (
-        <Card className={classNames(cls.articlelistitem, {}, [cls[view], className])} {...hoverEvents}>
-            <div className={cls.imageWrapper}>
-                <img alt={article.title} src={article.img} className={cls.img} />
-                <Text text={article.createdAt} className={cls.date} />
-            </div>
-            <div className={cls.infoWrapper}>
-                {types}
-                {views}
-            </div>
-        </Card>
+        <AppLink
+            target={target}
+            to={RoutePath.article_details + article.id}
+        >
+            <Card className={classNames(cls.articlelistitem, {}, [cls[view], className])} {...hoverEvents}>
+                <div className={cls.imageWrapper}>
+                    <img alt={article.title} src={article.img} className={cls.img} />
+                    <Text text={article.createdAt} className={cls.date} />
+                </div>
+                <div className={cls.infoWrapper}>
+                    {types}
+                    {views}
+                </div>
+            </Card>
+        </AppLink>
     );
 });

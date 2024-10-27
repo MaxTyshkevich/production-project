@@ -18,10 +18,16 @@ type useAsyncStoreProps ={
 export function useAsyncStore({ initialReducers, removeAfterUnmount = false }: useAsyncStoreProps) {
     const store = useStore() as ReduxStoreWithManager;
     const dispatch = useAppDispatch();
+
     useEffect(() => {
+        /*   store.reducerManager.getReducerMap(); */
+        const reducers = Object.keys(store.reducerManager.getReducerMap());
+
         Object.entries(initialReducers).forEach(([name, reducer]) => {
-            store.reducerManager.add(name as keyof ReducersList, reducer);
-            dispatch({ type: `@INIT ${name} reducer` });
+            if (!reducers.find((reducerName) => reducerName === name)) {
+                store.reducerManager.add(name as keyof ReducersList, reducer);
+                dispatch({ type: `@INIT ${name} reducer` });
+            }
         });
 
         return () => {

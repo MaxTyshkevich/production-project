@@ -1,5 +1,5 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import { memo, useCallback } from 'react';
+import { HTMLAttributeAnchorTarget, memo, useCallback } from 'react';
 import { Article } from 'entities/Article/modal/types/article';
 import cls from './ArticleList.module.scss';
 import { ArticleView, ArticleListItem } from '../ArticleListItem/ArticleListItem';
@@ -10,6 +10,7 @@ interface ArticleListProps {
   articles: Article[]
   isLoading?: boolean;
   view?: ArticleView;
+  target?: HTMLAttributeAnchorTarget;
 }
 
 const getSkeletons = (view: ArticleView) => new Array(view === ArticleView.SMALL ? 9 : 3)
@@ -24,6 +25,7 @@ export const ArticleList = memo(({
     isLoading,
     view = ArticleView.SMALL,
     className,
+    target = '_self',
 }:ArticleListProps) => {
     const RenderArticles = useCallback((article: Article) => (
         <ArticleListItem
@@ -31,8 +33,9 @@ export const ArticleList = memo(({
             article={article}
             className={cls.card}
             key={article.id}
+            target={target}
         />
-    ), [view]);
+    ), [target, view]);
     return (
         <div className={classNames(cls.articlelist, {}, [cls[view], className])}>
             {articles.map(RenderArticles)}

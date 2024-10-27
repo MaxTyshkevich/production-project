@@ -1,3 +1,5 @@
+export { ArticleSortField } from './modal/types/article';
+
 export { ArticleView } from './ui/ArticleListItem/ArticleListItem';
 
 export { ArticleList } from './ui/ArticleList/ArticleList';
