@@ -23,7 +23,7 @@ export const fetchArticlesList = createAsyncThunk<
     >(
         'articlesPage/fetchArticlesList',
         async (props, thunkApi) => {
-            //props читаем extrareducer
+            // props читаем extrareducer
             const { extra, rejectWithValue, getState } = thunkApi;
 
             const limit = getArticlesPageLimit(getState());

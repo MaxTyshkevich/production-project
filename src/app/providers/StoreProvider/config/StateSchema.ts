@@ -25,7 +25,6 @@ export interface StateSchema {
   loginForm?: LoginSchema,
   profile?: ProfileSchema,
 
-
   articleDetails?: ArticleDetailsSchema,
 
   /* 2 slices */

@@ -8,6 +8,7 @@ interface ArticleEditPageProps {
 }
 
 const ArticleEditPage = memo(({ className }:ArticleEditPageProps) => (
+    // eslint-disable-next-line i18next/no-literal-string
     <Page className={classNames(cls.articleeditpage, {}, [className])}>
         ArticleEditPage
 

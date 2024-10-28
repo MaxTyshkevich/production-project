@@ -3,7 +3,6 @@ import { memo, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArticleType } from 'entities/Article/modal/types/article';
 import { TabItem, Tabs } from 'shared/ui/Tabs/Tabs';
-import cls from './ArticleTypeTabs.module.scss';
 
 interface ArticleTypeTabsProps {
   value: ArticleType;
@@ -40,7 +39,7 @@ export const ArticleTypeTabs = memo((props:ArticleTypeTabsProps) => {
 
     return (
     // eslint-disable-next-line i18next/no-literal-string
-        <div className={classNames(cls.articletypetabs, {}, [className])}>
+        <div className={classNames('', {}, [className])}>
             <Tabs tabs={typeTabs} value={value} onTabClick={onTabClick} />
         </div>
     );

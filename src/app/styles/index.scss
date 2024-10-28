@@ -2,7 +2,7 @@
 @import "variables/global";
 @import "themes/normal";
 @import "themes/dark";
-@import "themes/orange.scss";
+@import "themes/orange";
 
 .app {
     background: var(--bg-color);
@@ -14,11 +14,6 @@
 .content-page {
     display: flex;
     height: calc(100vh - var(--navbar-height));
-}
-
-
-.content-page {
-    display: flex;
 }
 
 *::-webkit-scrollbar {

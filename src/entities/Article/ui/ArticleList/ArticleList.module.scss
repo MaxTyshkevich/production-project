@@ -1,15 +1,15 @@
-.articlelist{
-  display: flex;
-  flex-wrap: wrap;
+.articlelist {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .BIG {
-  flex-direction: column;
-  row-gap: 30px;
+    flex-direction: column;
+    row-gap: 30px;
 }
 
 .SMALL {
- flex-wrap: wrap;
- gap: 30px;
- justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
 }

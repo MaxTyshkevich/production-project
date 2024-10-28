@@ -4,10 +4,17 @@ import { DeepPartial } from '@reduxjs/toolkit';
 import { loginReducer } from 'features/AuthByUserName/model/slice/loginSlice';
 import { profileReducer } from 'entities/Profile';
 import { ReducersList } from 'shared/hooks/useAsyncStore';
+import { articleDetailsReducer } from 'entities/Article/modal/slice/articleDetailSlice';
+import { addCommentFormReducer } from 'features/AddCommentForm/modal/slice/addCommentFormSlice';
+import { articleDetailsPageReducer } from 'pages/ArticleDetailsPage/modal/slices/indext';
 
 const defaultAsyncReducers: ReducersList = {
     loginForm: loginReducer,
     profile: profileReducer,
+    articleDetails: articleDetailsReducer,
+    addCommentForm: addCommentFormReducer,
+    articleDetailsPage: articleDetailsPageReducer,
+
 };
 
 export const StoreDecorator = (
