@@ -42,14 +42,6 @@ export const ProfileCard = (props: ProfileCardProps) => {
         isLoading,
         error,
         readonly,
-        /*         onChangeFirstname,
-        onChangeLastname,
-        onChangeAge,
-        onChangeCity,
-        onChangeAvatar,
-        onChangeUsername,
-        onChangeCountry,
-        onChangeCurrency, */
     } = props;
     const { t } = useTranslation('profile');
 

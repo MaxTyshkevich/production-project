@@ -6,7 +6,7 @@ import { getProfile } from './getProfile';
 
 describe('seceltor getProfile', () => {
     test('should return profile', () => {
-        const data: DeepPartial<Profile> = {
+        const data: Partial<Profile> = {
             username: 'admin',
             age: 22,
             country: Country.Ukraine,
