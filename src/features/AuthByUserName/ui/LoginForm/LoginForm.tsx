@@ -2,17 +2,17 @@ import {
     FC, memo, useCallback,
 } from 'react';
 // eslint-disable-next-line max-len
-import { loginByUsername } from 'features/AuthByUserName/model/services/loginByUsername/LoginByUsername';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Input } from 'shared/ui/Input/Input';
 import { Button } from 'shared/ui/Button/Button';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { getLoginState } from 'features/AuthByUserName/model/selectors/getLoginState/getLoginState';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
-import { loginActions, loginReducer } from 'features/AuthByUserName/model/slice/loginSlice';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { ReducersList, useAsyncStore } from 'shared/hooks/useAsyncStore';
+import { loginActions, loginReducer } from '../../model/slice/loginSlice';
+import { getLoginState } from '../../model/selectors/getLoginState/getLoginState';
+import { loginByUsername } from '../../model/services/loginByUsername/LoginByUsername';
 import cls from './LoginForm.module.scss';
 
 const initialReducers: ReducersList = {

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { useSelector } from 'react-redux';
 import { getArticleDetailsData } from 'entities/Article/modal/selectors/articleDetails';
-import { getCanEditArticle } from 'pages/ArticleDetailsPage/modal/selector/getCanEditArticle';
+import { getCanEditArticle } from '../../../modal/selector/getCanEditArticle';
 import cls from './ArticleDetailsPageHeader.module.scss';
 
 interface ArticleDetailsPageHeaderProps {

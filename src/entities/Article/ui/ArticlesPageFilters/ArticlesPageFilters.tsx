@@ -1,10 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { Card } from 'shared/ui/Card/Card';
 import { Input } from 'shared/ui/Input/Input';
-import { ArticleViewSelector } from 'entities/Article/ui/ArticleViewSelector/ArticleViewSelector';
 import { memo, useCallback } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { ArticleSortField, ArticleView } from 'entities/Article';
 import { articlesPageActions } from 'pages/ArticlesPage/modal/slices/ArticlePageSlice';
 import {
     getArticlesPageOrder, getArticlesPageSearch, getArticlesPageSort, getArticlesPageType, getArticlesPageView,
@@ -14,10 +12,12 @@ import { SortOrder } from 'shared/types';
 import { fetchArticlesList } from 'pages/ArticlesPage/modal/services/fetchArticlesList/fetchArticlesList';
 import { useDebounce } from 'shared/hooks/useDebounce';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { ArticleTypeTabs } from 'entities/Article/ui/ArticleTypeTabs/ArticleTypeTabs';
-import { ArticleType } from 'entities/Article/modal/types/article';
+import { ArticleType, ArticleSortField } from '../../modal/types/article';
+import { ArticleTypeTabs } from '../../ui/ArticleTypeTabs/ArticleTypeTabs';
+import { ArticleViewSelector } from '../../ui/ArticleViewSelector/ArticleViewSelector';
 import cls from './ArticlesPageFilters.module.scss';
 import { ArticleSortSelector } from '../../../../pages/ArticlesPage/ui/ArticleSortSelector/ArticleSortSelector';
+import { ArticleView } from '../ArticleListItem/ArticleListItem';
 
 interface ArticlesPageFiltersProps {
     className?: string;

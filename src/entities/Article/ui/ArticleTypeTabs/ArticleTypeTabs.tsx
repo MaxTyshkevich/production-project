@@ -1,8 +1,8 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { memo, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArticleType } from 'entities/Article/modal/types/article';
 import { TabItem, Tabs } from 'shared/ui/Tabs/Tabs';
+import { ArticleType } from '../../modal/types/article';
 
 interface ArticleTypeTabsProps {
   value: ArticleType;

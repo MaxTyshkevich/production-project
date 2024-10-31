@@ -10,11 +10,11 @@ import { CurrencySelect } from 'entities/Currency';
 import { CountrySelect } from 'entities/Country'; */
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { profileActions } from 'entities/Profile/model/slice/profileSlice';
 import { useCallback } from 'react';
 import { Country, CountrySelect } from 'entities/Country';
 import { Currency } from 'shared/const/common';
 import { CurrencySelect } from 'entities/Currency';
+import { profileActions } from '../../model/slice/profileSlice';
 import cls from './ProfileCard.module.scss';
 import { Profile } from '../../model/types/profile';
 

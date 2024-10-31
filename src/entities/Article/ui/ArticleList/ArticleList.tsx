@@ -4,11 +4,11 @@ import {
     useEffect,
     useState,
 } from 'react';
-import { Article } from 'entities/Article/modal/types/article';
 import { List, ListRowProps, WindowScroller } from 'react-virtualized';
 import { PAGE_ID } from 'widgets/Page/Page';
 import { TextSize, Text } from 'shared/ui/Text/Text';
 import { useTranslation } from 'react-i18next';
+import { Article } from '../../modal/types/article';
 import cls from './ArticleList.module.scss';
 import { ArticleView, ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkeleton';

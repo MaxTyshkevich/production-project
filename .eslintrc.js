@@ -22,6 +22,7 @@ module.exports = {
         '@typescript-eslint',
         'i18next',
         'react-hooks',
+        'my-first-plugin888',
     ],
     rules: {
         'react/jsx-indent': [2, 4],
@@ -56,6 +57,7 @@ module.exports = {
         'react-hooks/exhaustive-deps': 'error', // Checks effect dependencies,
         'no-param-reassign': 'off',
         'no-undef': 'off',
+        'my-first-plugin888/path-checker': 'error',
     },
     globals: {
         __IS_DEV__: true,
