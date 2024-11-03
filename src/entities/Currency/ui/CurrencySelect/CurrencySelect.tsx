@@ -29,7 +29,7 @@ export const CurrencySelect = memo(({
 
     return (
         <Listbox
-            direction="top"
+            direction="top right"
             onChange={onChangeHandler}
             label={t('Укажите валюту')}
             defaultValue={t('Укажите валюту')}

@@ -32,7 +32,7 @@ export const CountrySelect = memo(({
     return (
 
         <Listbox
-            direction="top"
+            direction="top right"
             onChange={onChangeHandler}
             label={t('Укажите страну')}
             defaultValue={t('Укажите страну')}

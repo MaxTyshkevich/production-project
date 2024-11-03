@@ -4,8 +4,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './Listbox.module.scss';
 import { Button } from '../Button/Button';
 import { HStack } from '../Stack';
-
-type DropdownDirection = 'top' | 'bottom';
+import { DropdownDirection } from '../../types/ui';
 
 interface TypeListboxOption {
   value: string;
@@ -25,8 +24,10 @@ interface ListboxProps {
 }
 
 const mapDirectionClass: Record<DropdownDirection, string> = {
-    bottom: cls.optionsBottom,
-    top: cls.optionsTop,
+    'bottom left': cls.optionsBottomLeft,
+    'bottom right': cls.optionsBottomRight,
+    'top right': cls.optionsTopRight,
+    'top left': cls.optionsTopLeft,
 };
 
 export const Listbox = (props: ListboxProps) => {
@@ -38,10 +39,10 @@ export const Listbox = (props: ListboxProps) => {
         options,
         value,
         defaultValue,
-        direction = 'bottom',
+        direction = 'bottom right',
     } = props;
     const optionsClasses = [mapDirectionClass[direction]];
-    console.log(optionsClasses);
+
     return (
         <HStack gap="4">
             {label ?? <HListbox.Label className={cls.label}>{label}</HListbox.Label>}

@@ -1,10 +1,21 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { addDecorator, ComponentMeta, ComponentStory } from '@storybook/react';
 import { Listbox } from './Listbox';
 
 export default {
     title: 'shared/Listbox',
     component: Listbox,
+    decorators: [(Store: () => React.ReactChild) => (
+        <div style={{
+            width: '100vw',
+            height: '100vh',
+            display: 'flex',
+            justifyContent: ' center',
+        }}
+        >
+            {Store()}
+        </div>
+    )],
     argTypes: {
         backgroundColor: { control: 'color' },
 
@@ -35,11 +46,22 @@ Primary.args = {
 
 };
 
-export const menuTop = Template.bind({});
-menuTop.args = {
-    direction: 'top',
+export const menuTopRight = Template.bind({});
+menuTopRight.args = {
+    direction: 'top right',
 };
-export const menuBottom = Template.bind({});
-menuBottom.args = {
-    direction: 'bottom',
+
+export const menuTopLeft = Template.bind({});
+menuTopLeft.args = {
+    direction: 'top left',
+};
+
+export const menuBottomRight = Template.bind({});
+menuBottomRight.args = {
+    direction: 'bottom right',
+};
+
+export const menuBottomLeft = Template.bind({});
+menuBottomLeft.args = {
+    direction: 'bottom left',
 };
