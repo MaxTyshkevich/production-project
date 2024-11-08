@@ -1,47 +1,33 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import { FC, useEffect } from 'react';
-import { ReducersList, useAsyncStore } from 'shared/hooks/useAsyncStore';
-import { profileReducer } from 'entities/Profile/model/slice/profileSlice';
-import { fetchProfileData, ProfileCard } from 'entities/Profile';
+import { FC } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { useSelector } from 'react-redux';
-import { getProfile } from 'entities/Profile/model/selectors/getProfile';
 import { useParams } from 'react-router-dom';
-import { getUserAuthData, User } from 'entities/User';
+import { VStack } from 'shared/ui/Stack';
+import { Page } from 'widgets/Page/Page';
+import { Text } from 'shared/ui/Text/Text';
+import { EditableProfileCard } from 'features/editableProfileCard';
+import { useTranslation } from 'react-i18next';
 import cls from './ProfilePage.module.scss';
-import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
 interface ProfilePageProps {
   className?: string;
 }
 
-const reducers: ReducersList = {
-    profile: profileReducer,
-};
-
 const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
-    useAsyncStore({ initialReducers: reducers, removeAfterUnmount: true });
+    const { t } = useTranslation('profile');
     const { id } = useParams();
     const dispatch = useAppDispatch();
-    const {
-        form,
-        error,
-        isLoading,
-        readonly,
-    } = useSelector(getProfile);
-    const user: User | undefined = useSelector(getUserAuthData);
 
-    useEffect(() => {
-        if (id) {
-            dispatch(fetchProfileData(id));
-        }
-    }, [dispatch, id]);
+    if (!id) {
+        return <Text text={t('Профиль не найден')} />;
+    }
 
     return (
-        <div className={classNames(cls.profile, {}, [className])}>
-            <ProfilePageHeader />
-            <ProfileCard data={form} error={error} readonly={readonly} isLoading={isLoading} />
-        </div>
+        <Page className={classNames('', {}, [className])}>
+            <VStack gap="16" max className={classNames(cls.profile, {}, [className])}>
+                <EditableProfileCard id={id} />
+            </VStack>
+        </Page>
     );
 };
 

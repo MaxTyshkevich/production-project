@@ -23,6 +23,7 @@ import {
     ArticlesPageFilters,
 } from '../../../../entities/Article/ui/ArticlesPageFilters/ArticlesPageFilters';
 import cls from './ArticlesPage.module.scss';
+import { ArticleInfiniteList } from '../ArticleInfiniteList/ArticleInfiniteList';
 
 interface ArticlePageProps {
   className?: string;
@@ -33,12 +34,9 @@ const reducers: ReducersList = {
 };
 
 const ArticlesPage: FC<ArticlePageProps> = ({ className, children }) => {
-    const { t } = useTranslation('article');
-    const dispatch = useAppDispatch();
-    const view = useSelector(getArticlesPageView);
-    const isLoading = useSelector(getArticlesPageIsLoading);
-    const articles = useSelector(getArticles.selectAll);
     const [searchParams] = useSearchParams();
+    const dispatch = useAppDispatch();
+
     useAsyncStore({
         initialReducers: reducers,
 
@@ -55,18 +53,10 @@ const ArticlesPage: FC<ArticlePageProps> = ({ className, children }) => {
     }, [dispatch]);
 
     return (
-
         <Page className={classNames('articlesPage', {}, [className])} onScrollEnd={onLoadNextPart}>
-
             <ArticlesPageFilters />
-            <ArticleList
-                isLoading={isLoading}
-                articles={articles}
-                view={view}
-                className={cls.list}
-            />
+            <ArticleInfiniteList className={cls.list} />
         </Page>
-
     );
 };
 

@@ -27,7 +27,7 @@ export const ArticleDetailsPageHeader = memo(({ className }:ArticleDetailsPageHe
         navigate(`${RoutePath.article_details}${article?.id}/edit`);
     }, [article?.id, navigate]);
     return (
-        <HStack justify="beetwen">
+        <HStack justify="between">
             <Button theme={ButtonTheme.OUTLINE} onClick={onBackToList}>
                 {t('Назад к списку')}
             </Button>

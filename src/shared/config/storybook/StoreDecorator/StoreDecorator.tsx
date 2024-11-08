@@ -2,12 +2,12 @@ import { Story } from '@storybook/react';
 import { StateSchema, StoreProvider } from 'app/providers/StoreProvider';
 import { DeepPartial } from '@reduxjs/toolkit';
 import { loginReducer } from 'features/AuthByUserName/model/slice/loginSlice';
-import { profileReducer } from 'entities/Profile';
 import { ReducersList } from 'shared/hooks/useAsyncStore';
 import { articleDetailsReducer } from 'entities/Article/modal/slice/articleDetailSlice';
 import { addCommentFormReducer } from 'features/AddCommentForm/modal/slice/addCommentFormSlice';
 import { articleDetailsPageReducer } from 'pages/ArticleDetailsPage/modal/slices/indext';
 import { scrollReducer } from 'features/ScrollPage';
+import { profileReducer } from 'features/editableProfileCard';
 
 const defaultAsyncReducers: ReducersList = {
     loginForm: loginReducer,

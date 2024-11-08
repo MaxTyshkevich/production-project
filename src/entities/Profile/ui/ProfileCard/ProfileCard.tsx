@@ -3,77 +3,52 @@ import { useTranslation } from 'react-i18next';
 import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
 import { Input } from 'shared/ui/Input/Input';
 import { Loader } from 'shared/ui/Loader/Loader';
-/* import { Avatar } from 'shared/ui/Avatar/Avatar';
-
-import { CurrencySelect } from 'entities/Currency';
-
-import { CountrySelect } from 'entities/Country'; */
 import { Avatar } from 'shared/ui/Avatar/Avatar';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { useCallback } from 'react';
-import { Country, CountrySelect } from 'entities/Country';
-import { Currency } from 'shared/const/common';
+import { Currency } from 'entities/Currency/model/types/currency';
 import { CurrencySelect } from 'entities/Currency';
+import { Country } from 'entities/Country/model/types/country';
+import { CountrySelect } from 'entities/Country';
 import { HStack, VStack } from 'shared/ui/Stack';
-import { profileActions } from '../../model/slice/profileSlice';
 import cls from './ProfileCard.module.scss';
 import { Profile } from '../../model/types/profile';
 
 interface ProfileCardProps {
-    className?: string,
+    className?: string;
     data?: Profile;
     error?: string;
     isLoading?: boolean;
     readonly?: boolean;
-
+    onChangeLastname?: (value?: string) => void;
+    onChangeFirstname?: (value?: string) => void;
+    onChangeCity?: (value?: string) => void;
+    onChangeAge?: (value?: string) => void;
+    onChangeUsername?: (value?: string) => void;
+    onChangeAvatar?: (value?: string) => void;
+    onChangeCurrency?: (currency: Currency) => void;
+    onChangeCountry?: (country: Country) => void;
 }
 
 export const ProfileCard = (props: ProfileCardProps) => {
-    const dispatch = useAppDispatch();
     const {
         className,
         data,
         isLoading,
         error,
         readonly,
+        onChangeFirstname,
+        onChangeLastname,
+        onChangeAge,
+        onChangeCity,
+        onChangeAvatar,
+        onChangeUsername,
+        onChangeCountry,
+        onChangeCurrency,
     } = props;
     const { t } = useTranslation('profile');
 
-    const onChangeFirstname = useCallback((value?: string) => {
-        dispatch(profileActions.updateProfile({ first: value || '' }));
-    }, [dispatch]);
-
-    const onChangeLastname = useCallback((value?: string) => {
-        dispatch(profileActions.updateProfile({ lastname: value || '' }));
-    }, [dispatch]);
-
-    const onChangeCity = useCallback((value?: string) => {
-        dispatch(profileActions.updateProfile({ city: value || '' }));
-    }, [dispatch]);
-
-    const onChangeAge = useCallback((value?: string) => {
-        dispatch(profileActions.updateProfile({ age: Number(value || 0) }));
-    }, [dispatch]);
-
-    const onChangeUsername = useCallback((value?: string) => {
-        dispatch(profileActions.updateProfile({ username: value || '' }));
-    }, [dispatch]);
-
-    const onChangeAvatar = useCallback((value?: string) => {
-        dispatch(profileActions.updateProfile({ avatar: value || '' }));
-    }, [dispatch]);
-
-    const onChangeCurrency = useCallback((currency: Currency) => {
-        dispatch(profileActions.updateProfile({ currency }));
-    }, [dispatch]);
-
-    const onChangeCountry = useCallback((country: Country) => {
-        dispatch(profileActions.updateProfile({ country }));
-    }, [dispatch]);
-
     if (isLoading) {
         return (
-            <HStack max justify="center" className={classNames(cls.ProfileCard, { [cls.loading]: true }, [className])}>
+            <HStack justify="center" max className={classNames(cls.ProfileCard, { [cls.loading]: true }, [className])}>
                 <Loader />
             </HStack>
         );
@@ -81,7 +56,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
 
     if (error) {
         return (
-            <HStack max justify="center" className={classNames(cls.ProfileCard, {}, [className])}>
+            <HStack justify="center" max className={classNames(cls.ProfileCard, {}, [className, cls.error])}>
                 <Text
                     theme={TextTheme.ERROR}
                     title={t('Произошла ошибка при загрузке профиля')}
@@ -98,13 +73,11 @@ export const ProfileCard = (props: ProfileCardProps) => {
 
     return (
         <VStack gap="8" max className={classNames(cls.ProfileCard, mods, [className])}>
-
             {data?.avatar && (
-                <HStack justify="center" max>
+                <HStack justify="center" max className={cls.avatarWrapper}>
                     <Avatar src={data?.avatar} />
                 </HStack>
             )}
-
             <Input
                 value={data?.first}
                 placeholder={t('Ваше имя')}
@@ -120,7 +93,7 @@ export const ProfileCard = (props: ProfileCardProps) => {
                 readonly={readonly}
             />
             <Input
-                value={data?.age ? String(data.age) : ''}
+                value={data?.age}
                 placeholder={t('Ваш возраст')}
                 className={cls.input}
                 onChange={onChangeAge}
@@ -147,7 +120,6 @@ export const ProfileCard = (props: ProfileCardProps) => {
                 onChange={onChangeAvatar}
                 readonly={readonly}
             />
-
             <CurrencySelect
                 className={cls.input}
                 value={data?.currency}
@@ -160,7 +132,6 @@ export const ProfileCard = (props: ProfileCardProps) => {
                 onChange={onChangeCountry}
                 readonly={readonly}
             />
-
         </VStack>
     );
 };
