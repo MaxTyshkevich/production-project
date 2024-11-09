@@ -57,7 +57,7 @@ export const ArticleListItem = memo(({
         );
 
         return (
-            <Card className={classNames(cls.articlelistitem, {}, [cls[view], className])} {...hoverEvents}>
+            <Card className={classNames(cls.ArticleListItem, {}, [cls[view], className])} {...hoverEvents}>
                 <div className={cls.header}>
                     <Avatar size={30} src={article.user.avatar} />
                     <Text text={article.user.username} className={cls.username} />
@@ -84,8 +84,9 @@ export const ArticleListItem = memo(({
         <AppLink
             target={target}
             to={RoutePath.article_details + article.id}
+            className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
         >
-            <Card className={classNames(cls.articlelistitem, {}, [cls[view], className])} {...hoverEvents}>
+            <Card className={cls.card}>
                 <div className={cls.imageWrapper}>
                     <img alt={article.title} src={article.img} className={cls.img} />
                     <Text text={article.createdAt} className={cls.date} />
@@ -94,6 +95,7 @@ export const ArticleListItem = memo(({
                     {types}
                     {views}
                 </div>
+                <Text text={article.title} className={cls.title} />
             </Card>
         </AppLink>
     );

@@ -49,8 +49,10 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
     };
 
     useEffect(() => {
-        if (id) {
-            dispatch(fetchProfileData(id));
+        if (__PROJECT__ !== 'storybook' && __PROJECT__ !== 'jest') {
+            if (id) {
+                dispatch(fetchProfileData(id));
+            }
         }
     }, [dispatch, id]);
 
@@ -97,6 +99,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
                     key={err}
                     theme={TextTheme.ERROR}
                     text={validateErrorTranslates[err]}
+                    data-testid="EditableProfileCard.Error"
                 />
             ))}
             <ProfileCard

@@ -1,17 +1,13 @@
-.articlelist {
-    display: flex;
-    flex-wrap: wrap;
-}
-
 .BIG {
-    flex-direction: column;
-    row-gap: 30px;
+    .card {
+        margin-bottom: 30px;
+    }
 }
 
 .SMALL {
+    display: flex;
     flex-wrap: wrap;
     gap: 30px;
-    justify-content: center;
 
     .card {
         display: inline-flex;
