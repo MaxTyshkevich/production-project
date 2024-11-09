@@ -27,6 +27,6 @@ export const Loggined = Template.bind({});
 
 Loggined.decorators = [StoreDecorator({
     user: {
-        authData: { id: 1, password: '123', username: 'test-user' },
+        authData: { id: '1', password: '123', username: 'test-user' },
     },
 })];

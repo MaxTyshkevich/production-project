@@ -8,7 +8,7 @@ import { Theme } from 'app/providers/ThemeProvider';
 import { LoginModal } from 'features/AuthByUserName/';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserAuthData } from 'entities/User/modal/selector/getUserAuthData/getUserAuthData';
-import { userActions } from 'entities/User';
+import { isUserAdmin, isUserManager, userActions } from 'entities/User';
 import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { TextTheme, Text } from 'shared/ui/Text/Text';
@@ -24,6 +24,9 @@ export const Navbar = memo(({ className }: NavbarProps) => {
     const { t } = useTranslation();
     const [isAuthModal, setIsAuthModal] = useState(false);
     const authData = useSelector(getUserAuthData);
+    const isAdmin = useSelector(isUserAdmin);
+    const isManager = useSelector(isUserManager);
+
     const dispatch = useDispatch();
 
     const onCloseModal = useCallback(() => {
@@ -38,6 +41,9 @@ export const Navbar = memo(({ className }: NavbarProps) => {
         dispatch(userActions.logout());
     }, [dispatch]);
 
+    const isAdminPanelAvailable = isAdmin || isManager;
+
+    console.log({ isAdminPanelAvailable });
     if (authData) {
         return (
             <header className={classNames(cls.Navbar, {}, [className])}>
@@ -57,15 +63,18 @@ export const Navbar = memo(({ className }: NavbarProps) => {
                 <Dropdown
                     direction="bottom left"
                     className={cls.dropdown}
-                    items={[
-                        {
-                            content: t('Профиль'),
-                            href: RoutePath.profile + authData.id,
-                        },
-                        {
-                            content: t('Выйти'),
-                            onClick: onLogout,
-                        },
+                    items={[...(isAdminPanelAvailable ? [isAdminPanelAvailable && {
+                        content: t('Админка'),
+                        href: RoutePath.admin_panel,
+                    }] : []),
+                    {
+                        content: t('Профиль'),
+                        href: RoutePath.profile + authData.id,
+                    },
+                    {
+                        content: t('Выйти'),
+                        onClick: onLogout,
+                    },
                     ]}
                     trigger={<Avatar size={30} src={authData.avatar} />}
                 />
