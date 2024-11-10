@@ -1,10 +1,8 @@
 import { HTMLAttributeAnchorTarget, memo, useCallback } from 'react';
-import type{ Article } from 'entities/Article';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Text } from 'shared/ui/Text/Text';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { Card } from 'shared/ui/Card/Card';
-import { ArticleBlock, ArticleBlockText, ArticleBlockType } from 'entities/Article/modal/types/article';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { Icon } from 'shared/ui/Icon/Icon';
 import EyeIcon from 'shared/assets/icons/eye-20-20.svg';
@@ -13,6 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { useHover } from 'shared/hooks/useHover';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
+import type{ Article } from '../../modal/types/article';
+import { ArticleBlock, ArticleBlockText, ArticleBlockType } from '../../modal/types/article';
 import cls from './ArticleListItem.module.scss';
 import { ArticleText } from '../ArticleText/ArticleText';
 
@@ -57,7 +57,7 @@ export const ArticleListItem = memo(({
         );
 
         return (
-            <Card className={classNames(cls.articlelistitem, {}, [cls[view], className])} {...hoverEvents}>
+            <Card className={classNames(cls.ArticleListItem, {}, [cls[view], className])} {...hoverEvents}>
                 <div className={cls.header}>
                     <Avatar size={30} src={article.user.avatar} />
                     <Text text={article.user.username} className={cls.username} />
@@ -84,8 +84,9 @@ export const ArticleListItem = memo(({
         <AppLink
             target={target}
             to={RoutePath.article_details + article.id}
+            className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
         >
-            <Card className={classNames(cls.articlelistitem, {}, [cls[view], className])} {...hoverEvents}>
+            <Card className={cls.card}>
                 <div className={cls.imageWrapper}>
                     <img alt={article.title} src={article.img} className={cls.img} />
                     <Text text={article.createdAt} className={cls.date} />
@@ -94,6 +95,7 @@ export const ArticleListItem = memo(({
                     {types}
                     {views}
                 </div>
+                <Text text={article.title} className={cls.title} />
             </Card>
         </AppLink>
     );

@@ -1,8 +1,8 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { memo } from 'react';
-import { IComment } from 'entities/Comment/modal/types/comment';
 import { Text } from 'shared/ui/Text/Text';
 import { useTranslation } from 'react-i18next';
+import { IComment } from '../../modal/types/comment';
 import cls from './CommentList.module.scss';
 import { CommentCard } from '../CommentCard/CommentCard';
 

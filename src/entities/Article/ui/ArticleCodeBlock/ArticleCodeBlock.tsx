@@ -1,7 +1,7 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { memo } from 'react';
 import { Code } from 'shared/ui/Code/Code';
-import { ArticleBlockCode } from 'entities/Article/modal/types/article';
+import { ArticleBlockCode } from '../../../Article/modal/types/article';
 import cls from './ArticleCodeBlock.module.scss';
 
 interface ArticleCodeBlockProps {

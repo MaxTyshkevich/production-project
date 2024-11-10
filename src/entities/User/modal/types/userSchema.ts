@@ -1,11 +1,18 @@
+export enum UserRole {
+  ADMIN= 'ADMIN',
+  USER = 'USER',
+  MANAGER = 'MANAGER'
+}
+
 export interface User {
-  id: number;
+  id: string;
   username: string;
   password?:string;
   avatar?: string;
+  roles?: UserRole [];
 }
 
 export interface UserSchema {
-  authData?: User;
-  _inited: boolean;
+  authData?: User
+  _inited: boolean
 }

@@ -6,8 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { useSelector } from 'react-redux';
 import { getArticleDetailsData } from 'entities/Article/modal/selectors/articleDetails';
-import { getCanEditArticle } from 'pages/ArticleDetailsPage/modal/selector/getCanEditArticle';
-import cls from './ArticleDetailsPageHeader.module.scss';
+import { HStack } from 'shared/ui/Stack';
+import { getCanEditArticle } from '../../../modal/selector/getCanEditArticle';
 
 interface ArticleDetailsPageHeaderProps {
   className?: string;
@@ -27,7 +27,7 @@ export const ArticleDetailsPageHeader = memo(({ className }:ArticleDetailsPageHe
         navigate(`${RoutePath.article_details}${article?.id}/edit`);
     }, [article?.id, navigate]);
     return (
-        <div className={classNames(cls.articledetailspageheader, {}, [className])}>
+        <HStack justify="between">
             <Button theme={ButtonTheme.OUTLINE} onClick={onBackToList}>
                 {t('Назад к списку')}
             </Button>
@@ -37,6 +37,6 @@ export const ArticleDetailsPageHeader = memo(({ className }:ArticleDetailsPageHe
                     {t('Редактировать ')}
                 </Button>
             )}
-        </div>
+        </HStack>
     );
 });

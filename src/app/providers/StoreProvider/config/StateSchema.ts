@@ -6,21 +6,24 @@ import { AxiosInstance } from 'axios';
 import { ArticleDetailsSchema } from 'entities/Article';
 
 import { CounterSchema } from 'entities/Counter';
-import { ProfileSchema } from 'entities/Profile';
+
 import { UserSchema } from 'entities/User';
 import { AddCommentFormSchema } from 'features/AddCommentForm/modal/types/addCommentForm';
 import { LoginSchema } from 'features/AuthByUserName';
+import { ProfileSchema } from 'features/editableProfileCard';
 import { ScrollPageSchema } from 'features/ScrollPage';
 import { ArticleDetailsPageSchema } from 'pages/ArticleDetailsPage/modal/types';
 
 import { ArticleDetailsCommentsSchema } from 'pages/ArticleDetailsPage/modal/types/ArticleDetailsCommentsSchema';
 import { ArticlesPageSchema } from 'pages/ArticlesPage/modal/types/ArticlePageSchema';
 import { NavigateOptions, To } from 'react-router-dom';
+import { rtkApi } from 'shared/api/rtkApi';
 
 export interface StateSchema {
   counter: CounterSchema,
   user: UserSchema,
   scrollPages: ScrollPageSchema,
+  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
   // async reducer
   loginForm?: LoginSchema,
   profile?: ProfileSchema,

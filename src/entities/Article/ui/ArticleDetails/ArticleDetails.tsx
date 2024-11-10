@@ -3,23 +3,24 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { memo, useCallback, useEffect } from 'react';
 import { ReducersList, useAsyncStore } from 'shared/hooks/useAsyncStore';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { fetchArticleById } from 'entities/Article';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import {
     TextAlign, Text, TextTheme, TextSize,
 } from 'shared/ui/Text/Text';
 import { useSelector } from 'react-redux';
-import {
-    getArticleDetailsData,
-    getArticleDetailsError,
-    getArticleDetailsIsLoading,
-} from 'entities/Article/modal/selectors/articleDetails';
 import { useTranslation } from 'react-i18next';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { Icon } from 'shared/ui/Icon/Icon';
 import EyeIcon from 'shared/assets/icons/eye-20-20.svg';
 import CalendarIcon from 'shared/assets/icons/calendar-20-20.svg';
-import { ArticleBlock, ArticleBlockType } from 'entities/Article/modal/types/article';
+import { HStack, VStack } from 'shared/ui/Stack';
+import { fetchArticleById } from '../../modal/services/fetchArticleById/fetchArticleById';
+import {
+    getArticleDetailsData,
+    getArticleDetailsError,
+    getArticleDetailsIsLoading,
+} from '../../modal/selectors/articleDetails';
+import { ArticleBlock, ArticleBlockType } from '../../modal/types/article';
 import cls from './ArticleDetails.module.scss';
 import { articleDetailsReducer } from '../../modal/slice/articleDetailSlice';
 import { ArticleCodeBlock } from '../ArticleCodeBlock/ArticleCodeBlock';
@@ -89,33 +90,34 @@ export const ArticleDetails = memo(({
     } else {
         content = (
             <>
-                <div className={cls.avatarWrapper}>
-                    <Avatar size={200} src={article?.img} className={cls.avatar} />
-                </div>
-                <Text
-                    className={cls.title}
-                    title={article?.title}
-                    text={article?.subtitle}
-                    size={TextSize.L}
-                />
-                <div className={cls.articleInfo}>
-                    <Icon className={cls.icon} Svg={EyeIcon} />
-                    <Text text={String(article?.views)} />
-                </div>
-                <div className={cls.articleInfo}>
-                    <Icon className={cls.icon} Svg={CalendarIcon} />
-                    <Text text={article?.createdAt} />
-                </div>
+                <HStack justify="center" max>
+                    <Avatar size={200} src={article?.img} />
+                </HStack>
+
+                <VStack gap="4" max>
+                    <Text
+                        className={cls.title}
+                        title={article?.title}
+                        text={article?.subtitle}
+                        size={TextSize.L}
+                    />
+                    <HStack gap="8">
+                        <Icon Svg={EyeIcon} />
+                        <Text text={String(article?.views)} />
+                    </HStack>
+                    <HStack gap="8">
+                        <Icon Svg={CalendarIcon} />
+                        <Text text={article?.createdAt} />
+                    </HStack>
+                </VStack>
                 {article?.blocks.map(renderBlock)}
             </>
         );
     }
 
     return (
-
-        <div className={classNames(cls.articleDetails, {}, [className])}>
+        <VStack gap="16">
             {content}
-        </div>
-
+        </VStack>
     );
 });

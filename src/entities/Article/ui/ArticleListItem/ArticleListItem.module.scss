@@ -1,7 +1,7 @@
 .BIG {
-    /* .views {
-      margin-left: auto;
-  } */
+    .views {
+        margin-left: auto;
+    }
 
     .header {
         display: flex;
@@ -39,13 +39,10 @@
     }
 }
 
-.views {
-    margin-left: auto;
-    margin-right: 8px;
-}
-
 .SMALL {
     width: 230px;
+    transition: 0.2s;
+    cursor: pointer;
 
     .date {
         position: absolute;
@@ -88,10 +85,10 @@
         text-overflow: ellipsis;
     }
 
-    /*   .views {
-      margin-left: auto;
-      margin-right: 8px;
-  } */
+    .views {
+        margin-left: auto;
+        margin-right: 8px;
+    }
 
     .title {
         margin-top: 8px;

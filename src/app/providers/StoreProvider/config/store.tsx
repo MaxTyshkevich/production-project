@@ -7,6 +7,7 @@ import { userReducer } from 'entities/User';
 import { $api } from 'shared/api/api';
 import { NavigateOptions, To } from 'react-router-dom';
 import { scrollReducer } from 'features/ScrollPage';
+import { rtkApi } from 'shared/api/rtkApi';
 import { ReduxStoreWithManager, StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './reducerManager';
 
@@ -20,7 +21,7 @@ export const createReduxStore = (
         counter: counterReducer,
         user: userReducer,
         scrollPages: scrollReducer,
-
+        [rtkApi.reducerPath]: rtkApi.reducer,
     };
     const reducerManager = createReducerManager(rootReducers);
 
@@ -36,7 +37,7 @@ export const createReduxStore = (
             thunk: {
                 extraArgument: extraArg,
             },
-        }),
+        }).concat(rtkApi.middleware),
 
     });
 
