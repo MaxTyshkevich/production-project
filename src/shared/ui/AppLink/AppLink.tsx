@@ -15,7 +15,7 @@ interface AppLinkProps extends LinkProps {
     target?: HTMLAttributeAnchorTarget
 }
 
-export const AppLink: FC<AppLinkProps> = (props) => {
+export const AppLink = (props: AppLinkProps) => {
     const {
         to,
         className,

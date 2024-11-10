@@ -1,11 +1,9 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import {
-    FC, memo, useCallback, useEffect,
-} from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ArticleDetails, ArticleList } from 'entities/Article';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ReducersList, useAsyncStore } from 'shared/hooks/useAsyncStore';
 import { CommentList } from 'entities/Comment';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
@@ -13,9 +11,9 @@ import { useSelector } from 'react-redux';
 import { AddCommentForm } from 'features/AddCommentForm';
 import { Page } from 'widgets/Page/Page';
 import { Text, TextSize } from 'shared/ui/Text/Text';
-import { Button, ButtonTheme } from 'shared/ui/Button/Button';
+
 import cls from './ArticleDetailsPage.module.scss';
-import { articleDetailsCommentsReducer, getArticleComments } from '../../modal/slices/articleDetailsCommentsSlice';
+import { getArticleComments } from '../../modal/slices/articleDetailsCommentsSlice';
 import { fetchCommentsByArticleId } from '../../modal/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 import { addCommentForArticle } from '../../modal/services/addCommentForArticle/addCommentForArticle';
 import { articleDetailsPageReducer } from '../../modal/slices/indext';
@@ -35,7 +33,7 @@ const reducer: ReducersList = {
     articleDetailsPage: articleDetailsPageReducer,
 };
 
-const ArticleDetailsPage: FC<ArticleDetailsPageProps> = ({ className, children }) => {
+const ArticleDetailsPage = ({ className }: ArticleDetailsPageProps) => {
     useAsyncStore({ initialReducers: reducer, removeAfterUnmount: true });
     const { t } = useTranslation('article');
     const dispatch = useAppDispatch();

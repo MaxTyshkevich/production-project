@@ -10,7 +10,7 @@ interface CodeProps {
   className?: string;
 }
 
-export const Code: FC<CodeProps> = ({ className, text }:CodeProps) => {
+export const Code = ({ className, text }:CodeProps) => {
     const onCopy = useCallback(() => {
         navigator.clipboard.writeText(text);
     }, [text]);

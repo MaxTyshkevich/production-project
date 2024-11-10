@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import {
-    FC, memo, useCallback, useEffect,
+    memo, useCallback, useEffect,
 
 } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -32,7 +32,7 @@ const reducers: ReducersList = {
     articlesPage: articlesPageReducer,
 };
 
-const ArticlesPage: FC<ArticlePageProps> = ({ className, children }) => {
+const ArticlesPage = ({ className }:ArticlePageProps) => {
     const { t } = useTranslation('article');
     const dispatch = useAppDispatch();
     const view = useSelector(getArticlesPageView);

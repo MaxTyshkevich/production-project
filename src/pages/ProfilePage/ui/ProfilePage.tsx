@@ -19,7 +19,7 @@ const reducers: ReducersList = {
     profile: profileReducer,
 };
 
-const ProfilePage: FC<ProfilePageProps> = ({ className }) => {
+const ProfilePage = ({ className }: ProfilePageProps) => {
     useAsyncStore({ initialReducers: reducers, removeAfterUnmount: true });
     const { id } = useParams();
     const dispatch = useAppDispatch();

@@ -1,5 +1,5 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import { CSSProperties, FC } from 'react';
+import { CSSProperties, FC, ReactNode } from 'react';
 import cls from './Skeleton.module.scss';
 
 interface SkeletonProps {
@@ -7,15 +7,16 @@ interface SkeletonProps {
   width?: string | number;
   height?: string | number;
   border?: string;
+  children?: ReactNode;
 }
 
-export const Skeleton: FC<SkeletonProps> = ({
+export const Skeleton = ({
     className,
     children,
     width,
     height,
     border,
-}) => {
+}:SkeletonProps) => {
     const styles:CSSProperties = {
         width,
         height,
