@@ -12,12 +12,11 @@ import { SortOrder } from 'shared/types';
 import { fetchArticlesList } from 'pages/ArticlesPage/modal/services/fetchArticlesList/fetchArticlesList';
 import { useDebounce } from 'shared/hooks/useDebounce';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { ArticleType, ArticleSortField } from '../../modal/types/article';
+import { ArticleType, ArticleSortField, ArticleView } from '../../modal/cosnts/articleConst';
 import { ArticleTypeTabs } from '../../ui/ArticleTypeTabs/ArticleTypeTabs';
 import { ArticleViewSelector } from '../../ui/ArticleViewSelector/ArticleViewSelector';
 import cls from './ArticlesPageFilters.module.scss';
 import { ArticleSortSelector } from '../../../../pages/ArticlesPage/ui/ArticleSortSelector/ArticleSortSelector';
-import { ArticleView } from '../ArticleListItem/ArticleListItem';
 
 interface ArticlesPageFiltersProps {
     className?: string;

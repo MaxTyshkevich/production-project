@@ -1,6 +1,7 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { memo, ReactNode, useCallback } from 'react';
-import { ArticleType } from 'entities/Article/modal/types/article';
+
+import { ArticleType } from 'entities/Article';
 import cls from './Tabs.module.scss';
 import { Card, CardTheme } from '../Card/Card';
 

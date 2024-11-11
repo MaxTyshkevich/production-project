@@ -1,4 +1,4 @@
-export { AppDispatch } from './config/store';
+export type { AppDispatch } from './config/store';
 
 export type { StateSchema, ThunkConfig } from './config/StateSchema';
 export { createReduxStore } from './config/store';

@@ -8,8 +8,9 @@ import { TextSize, Text } from 'shared/ui/Text/Text';
 import { useTranslation } from 'react-i18next';
 import { Article } from '../../modal/types/article';
 import cls from './ArticleList.module.scss';
-import { ArticleView, ArticleListItem } from '../ArticleListItem/ArticleListItem';
+import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkeleton';
+import { ArticleView } from '../../modal/cosnts/articleConst';
 
 interface ArticleListProps {
     articles: Article[];

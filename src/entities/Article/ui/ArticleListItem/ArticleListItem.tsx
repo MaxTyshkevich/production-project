@@ -12,14 +12,10 @@ import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { useHover } from 'shared/hooks/useHover';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import type{ Article } from '../../modal/types/article';
-import { ArticleBlock, ArticleBlockText, ArticleBlockType } from '../../modal/types/article';
+import { ArticleBlock, ArticleBlockText } from '../../modal/types/article';
 import cls from './ArticleListItem.module.scss';
 import { ArticleText } from '../ArticleText/ArticleText';
-
-export enum ArticleView {
-  BIG ='BIG',
-  SMALL ='SMALL',
-}
+import { ArticleBlockType, ArticleView } from '../../modal/cosnts/articleConst';
 
 interface ArticleListItemProps {
   className?: string;
